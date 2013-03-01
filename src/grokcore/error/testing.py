@@ -65,7 +65,7 @@ class Logger(logging.Handler):
         return self._records
 
     def emit(self, record):
-        self._records.append(self.format(record))
+        self._records.append(record)
 
     def __enter__(self):
         logger = logging.getLogger(self.name)
