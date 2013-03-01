@@ -5,23 +5,15 @@ import zope.error.interfaces
 import grokcore.error
 import grokcore.error.testing
 
-
 class FauxRequest(object):
 
     def __init__(self, url):
         self.URL = url
 
-class TestErrorReportingUtility(grokcore.error.testing.TestCase):
-    layer = grokcore.error.testing.layer
-
-    def test_utility_registered(self):
-        eru = zope.component.getUtility(
-            zope.error.interfaces.IErrorReportingUtility)
-        self.assertTrue(isinstance(eru, grokcore.error.LoggingErrorReporting))
+class TestErrorReporting(grokcore.error.testing.TestCase):
 
     def test_raising(self):
-        eru = zope.component.getUtility(
-            zope.error.interfaces.IErrorReportingUtility)
+        eru = grokcore.error.LoggingErrorReporting()
         with grokcore.error.testing.Logger() as log:
             try:
                 raise Exception('test raising an Exception')
@@ -41,8 +33,7 @@ class TestErrorReportingUtility(grokcore.error.testing.TestCase):
             log.format(log.records[0]))
 
     def test_raising_with_request(self):
-        eru = zope.component.getUtility(
-            zope.error.interfaces.IErrorReportingUtility)
+        eru = grokcore.error.LoggingErrorReporting()
         with grokcore.error.testing.Logger() as log:
             try:
                 raise Exception('test raising an Exception')
@@ -60,3 +51,11 @@ class TestErrorReportingUtility(grokcore.error.testing.TestCase):
             Exception: test raising an Exception
             """,
             log.format(log.records[0]))
+
+class TestErrorReportingUtility(grokcore.error.testing.TestCase):
+    layer = grokcore.error.testing.layer
+
+    def test_utility_registered(self):
+        eru = zope.component.getUtility(
+            zope.error.interfaces.IErrorReportingUtility)
+        self.assertTrue(isinstance(eru, grokcore.error.LoggingErrorReporting))

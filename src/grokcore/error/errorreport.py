@@ -46,7 +46,7 @@ class LoggingErrorReporting(grok.GlobalUtility):
             if url is not None:
                 msg += (' (URL: %s)' % url)
 
-        level = self.logger.exception
+        level = self.logger.error
 
         if issubclass(exc_class, self.info_level_exceptions):
             level = self.logger.info
