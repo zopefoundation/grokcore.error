@@ -5,11 +5,11 @@ import grokcore.component as grok
 
 
 # XXX this configuration needs to go somewhere. Where?
-_info_level_exceptions = (
+_info_level_errors = (
     'zope.security.interfaces.Unauthorized',
     )
 
-_warning_level_exceptions = (
+_warning_level_errors = (
     'zope.publisher.interfaces.NotFound',
     )
 
@@ -22,18 +22,18 @@ class LoggingErrorReporting(grok.GlobalUtility):
 
     def __init__(
             self,
-            info_level_exceptions=_info_level_exceptions,
-            warning_level_exceptions=_warning_level_exceptions,
+            info_level_errors=_info_level_errors,
+            warning_level_errors=_warning_level_errors,
             always_exc_info=_always_exc_info):
 
         self.logger = logging.getLogger('grokcore.error')
         self.always_exc_info = always_exc_info
 
-        self.info_level_exceptions = tuple(
-            map(zope.dottedname.resolve.resolve, info_level_exceptions))
+        self.info_level_errors = tuple(
+            map(zope.dottedname.resolve.resolve, info_level_errors))
 
-        self.warning_level_exceptions = tuple(
-            map(zope.dottedname.resolve.resolve, warning_level_exceptions))
+        self.warning_level_errors = tuple(
+            map(zope.dottedname.resolve.resolve, warning_level_errors))
 
     def make_extra(self, request=None):
         return None
@@ -48,11 +48,11 @@ class LoggingErrorReporting(grok.GlobalUtility):
 
         level = self.logger.error
 
-        if issubclass(exc_class, self.info_level_exceptions):
+        if issubclass(exc_class, self.info_level_errors):
             level = self.logger.info
             exc_info = exc_info if self.always_exc_info else None
 
-        elif issubclass(exc_class, self.warning_level_exceptions):
+        elif issubclass(exc_class, self.warning_level_errors):
             level = self.logger.warning
             exc_info = exc_info if self.always_exc_info else None
 
