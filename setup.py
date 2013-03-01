@@ -7,22 +7,11 @@ def read(*rnames):
 long_description = (
     read('README.txt')
     + '\n' +
-    read(os.path.join('src', 'grokcore', 'error', 'README.txt'))
-    + '\n' +
     read('CHANGES.txt')
     )
 
 tests_require = [
-    'zope.app.appsetup',
-    'zope.component',
-    'zope.interface',
     'zope.testing',
-    'zope.security',
-    'zope.securitypolicy',
-    ]
-
-debug_requires = [
-    'IPython',
     ]
 
 setup(
@@ -49,13 +38,15 @@ setup(
     zip_safe=False,
     install_requires=[
         'setuptools',
+        'grokcore.component',
+        'zope.interface',
         'zope.component',
-        'zope.publisher',
+        'zope.error',
         'zope.dottedname',
-        'zope.app.wsgi',
-        'zope.app.debug',
+        # For the default configuration of the reporting utility.
+        'zope.publisher',
+        'zope.security',
         ],
-    tests_require = tests_require,
-    extras_require = dict(test=tests_require, debug=debug_requires),
-    },
+    tests_require=tests_require,
+    extras_require={'test': tests_require},
 )

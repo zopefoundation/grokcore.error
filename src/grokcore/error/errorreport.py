@@ -1,19 +1,30 @@
+import logging
+import zope.dottedname.resolve
+import zope.error.interfaces
+import grokcore.component as grok
+
+
+# XXX this configuration needs to go somewhere. Where?
+_info_level_exceptions = (
+    'zope.security.interfaces.Unauthorized',
+    )
+
+_warning_level_exceptions = (
+    'zope.publisher.interfaces.NotFound',
+    )
+
+_always_exc_info = False
 
 
 class LoggingErrorReporting(grok.GlobalUtility):
-    grok.baseclass()
     grok.implements(zope.error.interfaces.IErrorReportingUtility)
     grok.provides(zope.error.interfaces.IErrorReportingUtility)
 
-    info_level_exceptions = ()
-    warning_level_exceptions = ()
-    always_exc_info = False
-
     def __init__(
             self,
-            info_level_exceptions=_ith_default_infos,  # FTBB
-            warning_level_exceptions=_ith_default_warnings,  # FTTB
-            always_exc_info=False):
+            info_level_exceptions=_info_level_exceptions,
+            warning_level_exceptions=_warning_level_exceptions,
+            always_exc_info=_always_exc_info):
 
         self.logger = logging.getLogger('grokcore.error')
         self.always_exc_info = always_exc_info
@@ -35,7 +46,8 @@ class LoggingErrorReporting(grok.GlobalUtility):
             if url is not None:
                 msg += (' (URL: %s)' % url)
 
-        level = self.logger.error
+        level = self.logger.exception
+
         if issubclass(exc_class, self.info_level_exceptions):
             level = self.logger.info
             exc_info = exc_info if self.always_exc_info else None
