@@ -83,6 +83,8 @@ class TestErrorReporting(grokcore.error.testing.TestCase):
             log.format(log.records[0]))
 
 class TestErrorReportingUtility(grokcore.error.testing.TestCase):
+
+    # This test layer will "grok" the grokcore.error package.
     layer = grokcore.error.testing.layer
 
     def test_utility_registered(self):

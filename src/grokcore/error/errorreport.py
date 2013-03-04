@@ -4,27 +4,15 @@ import zope.error.interfaces
 import grokcore.component as grok
 
 
-# XXX this configuration needs to go somewhere. Where?
-_info_level_errors = (
-    'zope.security.interfaces.Unauthorized',
-    )
-
-_warning_level_errors = (
-    'zope.publisher.interfaces.NotFound',
-    )
-
-_always_exc_info = False
-
-
-class LoggingErrorReporting(grok.GlobalUtility):
+class LoggingErrorReporting(object):
     grok.implements(zope.error.interfaces.IErrorReportingUtility)
     grok.provides(zope.error.interfaces.IErrorReportingUtility)
 
     def __init__(
             self,
-            info_level_errors=_info_level_errors,
-            warning_level_errors=_warning_level_errors,
-            always_exc_info=_always_exc_info):
+            info_level_errors=(),
+            warning_level_errors=(),
+            always_exc_info=False):
 
         self.logger = logging.getLogger('grokcore.error')
         self.always_exc_info = always_exc_info
@@ -60,3 +48,11 @@ class LoggingErrorReporting(grok.GlobalUtility):
             level(msg, exc_info=exc_info, extra=self.make_extra(request))
         finally:
             exc_info = None  # gc cleanup.
+
+grok.global_utility(
+    LoggingErrorReporting(
+        # XXX this configuration needs to go somewhere. Where?
+        ('zope.security.interfaces.Unauthorized',),
+        ('zope.publisher.interfaces.NotFound',),
+        False),
+    direct=True)

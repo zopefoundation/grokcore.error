@@ -78,4 +78,3 @@ class Logger(logging.Handler):
         logger = logging.getLogger(self.name)
         logger.setLevel(self._levels[self.name])
         logger.removeHandler(self)
-
