@@ -7,7 +7,7 @@ import grokcore.error
 class Layer(zope.component.testlayer.ZCMLFileLayer):
     pass
 
-layer = Layer(grokcore.error, zcml_file='configure.zcml')
+layer = Layer(grokcore.error, zcml_file='testing.zcml')
 
 class Example(object):
     def __init__(self, expected):
