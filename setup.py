@@ -37,15 +37,13 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-        'setuptools',
         'grokcore.component',
-        'zope.interface',
+        'setuptools',
         'zope.component',
-        'zope.error',
+        'zope.configuration'
         'zope.dottedname',
-        # For the default configuration of the reporting utility.
-        'zope.publisher',
-        'zope.security',
+        'zope.error',
+        'zope.interface',
         ],
     tests_require=tests_require,
     extras_require={'test': tests_require},

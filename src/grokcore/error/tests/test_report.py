@@ -54,7 +54,7 @@ class TestErrorReporting(grokcore.error.testing.TestCase):
 
     def test_raising_as_info(self):
         eru = grokcore.error.LoggingErrorReporting(
-            info_level_errors=('__builtin__.Exception',))
+            info_level_errors=(Exception,))
         with grokcore.error.testing.Logger() as log:
             try:
                 raise Exception('test raising an Exception')
@@ -69,7 +69,7 @@ class TestErrorReporting(grokcore.error.testing.TestCase):
 
     def test_raising_as_waring(self):
         eru = grokcore.error.LoggingErrorReporting(
-            warning_level_errors=('__builtin__.Exception',))
+            warning_level_errors=(Exception,))
         with grokcore.error.testing.Logger() as log:
             try:
                 raise Exception('test raising an Exception')

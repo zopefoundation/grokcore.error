@@ -10,18 +10,13 @@ class LoggingErrorReporting(object):
 
     def __init__(
             self,
-            info_level_errors=(),
-            warning_level_errors=(),
+            info_level_errors=None,
+            warning_level_errors=None,
             always_exc_info=False):
-
         self.logger = logging.getLogger('grokcore.error')
+        self.info_level_errors = info_level_errors
+        self.warning_level_errors = warning_level_errors
         self.always_exc_info = always_exc_info
-
-        self.info_level_errors = tuple(
-            map(zope.dottedname.resolve.resolve, info_level_errors))
-
-        self.warning_level_errors = tuple(
-            map(zope.dottedname.resolve.resolve, warning_level_errors))
 
     def make_extra(self, request=None):
         return None
@@ -36,11 +31,13 @@ class LoggingErrorReporting(object):
 
         level = self.logger.error
 
-        if issubclass(exc_class, self.info_level_errors):
+        if self.info_level_errors and \
+                issubclass(exc_class, self.info_level_errors):
             level = self.logger.info
             exc_info = exc_info if self.always_exc_info else None
 
-        elif issubclass(exc_class, self.warning_level_errors):
+        elif self.warning_level_errors and \
+                issubclass(exc_class, self.warning_level_errors):
             level = self.logger.warning
             exc_info = exc_info if self.always_exc_info else None
 
@@ -48,11 +45,3 @@ class LoggingErrorReporting(object):
             level(msg, exc_info=exc_info, extra=self.make_extra(request))
         finally:
             exc_info = None  # gc cleanup.
-
-grok.global_utility(
-    LoggingErrorReporting(
-        # XXX this configuration needs to go somewhere. Where?
-        ('zope.security.interfaces.Unauthorized',),
-        ('zope.publisher.interfaces.NotFound',),
-        False),
-    direct=True)
