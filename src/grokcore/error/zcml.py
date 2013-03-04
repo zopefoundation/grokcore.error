@@ -35,7 +35,7 @@ class IErrorReportingUtilityDirective(zope.interface.Interface):
             missing_value=object()),
         )
 
-    always_exc_info = zope.schema.Bool(
+    always_exc_info = zope.configuration.fields.Bool(
         title=_("Always emit exc_info"),
         description=_(
             'When set to True, the exc_info of the error being logged is '
