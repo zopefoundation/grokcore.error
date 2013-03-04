@@ -40,7 +40,7 @@ setup(
         'grokcore.component',
         'setuptools',
         'zope.component',
-        'zope.configuration'
+        'zope.configuration',
         'zope.dottedname',
         'zope.error',
         'zope.interface',
