@@ -1,7 +1,7 @@
 Changes
 *******
 
-0.2 (unreleased)
+0.2 (2013-03-05)
 ================
 
 - Update manifest.in.
