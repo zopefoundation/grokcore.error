@@ -1,5 +1,4 @@
 import logging
-import zope.dottedname.resolve
 import zope.error.interfaces
 import grokcore.component as grok
 
