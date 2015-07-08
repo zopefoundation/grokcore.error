@@ -1,7 +1,7 @@
 Changes
 *******
 
-0.5 (unreleased)
+0.5 (2015-07-08)
 ================
 
 - When there is no principal in the request, don't send the 'user' sentry
