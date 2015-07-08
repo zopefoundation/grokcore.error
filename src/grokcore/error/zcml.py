@@ -2,7 +2,9 @@ import zope.interface
 import zope.configuration.fields
 import grokcore.component
 
+
 _ = lambda x: unicode(x)  # no i18n-ing for now.
+
 
 class IErrorReportingUtilityDirective(zope.interface.Interface):
     """Register a error reporting utility.
@@ -47,6 +49,7 @@ class IErrorReportingUtilityDirective(zope.interface.Interface):
         default=False,
         required=False,
         )
+
 
 def errorreportingutility(
         _context,

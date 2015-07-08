@@ -4,14 +4,18 @@ import logging
 import zope.component.testlayer
 import grokcore.error
 
+
 class Layer(zope.component.testlayer.ZCMLFileLayer):
     pass
 
+
 layer = Layer(grokcore.error, zcml_file='testing.zcml')
+
 
 class Example(object):
     def __init__(self, expected):
         self.want = expected
+
 
 class OutputCheckerMixin(object):
 
@@ -34,8 +38,10 @@ class OutputCheckerMixin(object):
             raise self.failureException(diff)
         return right
 
+
 class TestCase(OutputCheckerMixin, unittest.TestCase):
     pass
+
 
 class Logger(logging.Handler):
     """

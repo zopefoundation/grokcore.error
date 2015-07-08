@@ -1,14 +1,15 @@
-import logging
 import sys
 import zope.component
 import zope.error.interfaces
 import grokcore.error
 import grokcore.error.testing
 
+
 class FauxRequest(object):
 
     def __init__(self, url):
         self.URL = url
+
 
 class TestErrorReporting(grokcore.error.testing.TestCase):
 
@@ -81,6 +82,7 @@ class TestErrorReporting(grokcore.error.testing.TestCase):
         self.assertEqual(
             """Exception test raising an Exception""",
             log.format(log.records[0]))
+
 
 class TestErrorReportingUtility(grokcore.error.testing.TestCase):
 

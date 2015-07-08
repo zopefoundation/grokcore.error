@@ -1,11 +1,13 @@
 Changes
 *******
 
-0.4 (unreleased)
+0.5 (unreleased)
 ================
 
-- Nothing changed yet.
+- When there is no principal in the request, don't send the 'user' sentry
+  information.
 
+- Note: 0.4 got lost between an internal and a public release.
 
 0.3 (2013-03-05)
 ================
