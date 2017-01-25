@@ -82,14 +82,3 @@ class TestErrorReporting(grokcore.error.testing.TestCase):
         self.assertEqual(
             """Exception test raising an Exception""",
             log.format(log.records[0]))
-
-
-class TestErrorReportingUtility(grokcore.error.testing.TestCase):
-
-    # This test layer will "grok" the grokcore.error package.
-    layer = grokcore.error.testing.layer
-
-    def test_utility_registered(self):
-        eru = zope.component.getUtility(
-            zope.error.interfaces.IErrorReportingUtility)
-        self.assertTrue(isinstance(eru, grokcore.error.LoggingErrorReporting))
