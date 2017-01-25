@@ -4,8 +4,7 @@ Changes
 0.6 (unreleased)
 ================
 
-- Nothing changed yet.
-
+- Update information sent to Sentry.
 
 0.5 (2015-07-08)
 ================
