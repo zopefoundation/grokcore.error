@@ -13,15 +13,27 @@ class SentryAwareLoggingErrorReporting(grokcore.error.LoggingErrorReporting):
         if not _request_iface.providedBy(request):
             return None
         host = request.getHeader(
-            'HTTP_X_FORWARDED_FOR', request.getHeader('REMOTE_ADDR'))
+            'HTTP_X_FORWARDED_FOR',
+            request.getHeader('REMOTE_ADDR'))
         # Only push the first 10K of bytes to sentry.
         data = request.bodyStream.getCacheStream().read(10 * 1024)
+
+        environ = {}
+        headers = {}
+        for key, value in request._environ.items():
+            if key.startswith('HTTP_'):
+                headers[key[5:].replace('_', '-').capitalize()] = value
+            else:
+                environ[key] = value
 
         result = {
             'sentry.interfaces.Http': {
                 'url': request.getURL(),
                 'method': request.method,
-                'headers': dict(request.items()),
+                'headers': headers,
+                'cookies': headers.get('Cookie'),
+                'query_string': environ.get('QUERY_STRING'),
+                'env': environ,
                 'host': host,
                 'data': data,
             }
