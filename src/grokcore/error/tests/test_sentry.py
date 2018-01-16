@@ -1,5 +1,4 @@
 import unittest
-import mock
 
 from zope.publisher.browser import TestRequest
 
@@ -8,8 +7,13 @@ from grokcore.error.zcml import errorreportingutility
 
 import sys
 if sys.version_info.major == 2:
+    import mock
+
     def bytes(arg, encoding):
         return str(arg)
+
+else:
+    from unittest import mock
 
 
 class ZcmlTestCase(unittest.TestCase):
@@ -18,7 +22,7 @@ class ZcmlTestCase(unittest.TestCase):
         _context = mock.Mock()
         errorreportingutility(
             _context, factory=SentryAwareLoggingErrorReporting)
-        _context.action.assert_called()
+        self.assertTrue(_context.action.called)
 
     def test_make_extra(self):
         request = TestRequest()

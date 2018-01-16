@@ -1,6 +1,8 @@
 from setuptools import setup, find_packages
 import os
 
+import sys
+
 
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
@@ -11,10 +13,13 @@ long_description = (
     read('CHANGES.txt')
     )
 
+
 tests_require = [
     'zope.testing',
-    'mock',
     ]
+
+if sys.version_info.major == 2:
+    tests_require.append('mock==1.0.1')
 
 setup(
     name='grokcore.error',
@@ -42,7 +47,7 @@ setup(
         'Programming Language :: Python :: Implementation :: CPython',
         'Programming Language :: Python :: Implementation :: PyPy',
         'Framework :: Zope3',
-        ],    
+    ],
     packages=find_packages('src'),
     package_dir={'': 'src'},
     namespace_packages=['grokcore'],
