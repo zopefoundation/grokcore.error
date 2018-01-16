@@ -4,6 +4,10 @@ import logging
 import zope.component.testlayer
 import grokcore.error
 
+import sys
+if sys.version_info.major == 3:
+    unicode = str
+
 
 class Layer(zope.component.testlayer.ZCMLFileLayer):
     pass
