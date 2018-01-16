@@ -4,7 +4,7 @@ Changes
 3.0.1 (unreleased)
 ==================
 
-- Nothing changed yet.
+- Downpin mock test dependency for python2.7.
 
 
 3.0.0 (2018-01-16)
