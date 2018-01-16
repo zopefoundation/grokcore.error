@@ -1,6 +1,4 @@
 import sys
-import zope.component
-import zope.error.interfaces
 import grokcore.error
 import grokcore.error.testing
 
