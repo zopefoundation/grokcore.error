@@ -4,8 +4,7 @@ Changes
 0.7 (unreleased)
 ================
 
-- Nothing changed yet.
-
+- Python 3 compatibility.
 
 0.6 (2017-01-25)
 ================
