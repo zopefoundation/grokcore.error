@@ -6,6 +6,8 @@ Changes
 
 - Downpin mock test dependency for python2.7.
 
+- Replace grok.implements() with @grok.implementer()
+
 
 3.0.0 (2018-01-16)
 ==================
