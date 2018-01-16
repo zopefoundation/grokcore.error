@@ -4,6 +4,10 @@ import logging
 import zope.component.testlayer
 import grokcore.error
 
+import sys
+if sys.version_info.major == 3:
+    unicode = str
+
 
 class Layer(zope.component.testlayer.ZCMLFileLayer):
     pass
@@ -24,7 +28,7 @@ class OutputCheckerMixin(object):
         # In case *both* comparision items are ASCII strings
         self.addTypeEqualityFunc(str, self._check_basestring)
         # In case *both* comparision items are unicode strings
-        self.addTypeEqualityFunc(str, self._check_basestring)
+        self.addTypeEqualityFunc(unicode, self._check_basestring)
 
     def _check_basestring(self, expected, actual, msg=None):
         flags = (
