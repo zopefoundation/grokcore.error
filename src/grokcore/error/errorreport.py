@@ -3,8 +3,8 @@ import zope.error.interfaces
 import grokcore.component as grok
 
 
+@grok.implementer(zope.error.interfaces.IErrorReportingUtility)
 class LoggingErrorReporting(object):
-    grok.implements(zope.error.interfaces.IErrorReportingUtility)
     grok.provides(zope.error.interfaces.IErrorReportingUtility)
 
     def __init__(

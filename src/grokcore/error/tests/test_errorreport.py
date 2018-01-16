@@ -1,6 +1,8 @@
 import sys
 import grokcore.error
 import grokcore.error.testing
+import zope.component
+import zope.error.interfaces
 
 
 class FauxRequest(object):
@@ -66,7 +68,7 @@ class TestErrorReporting(grokcore.error.testing.TestCase):
             """Exception test raising an Exception""",
             log.format(log.records[0]))
 
-    def test_raising_as_waring(self):
+    def test_raising_as_warning(self):
         eru = grokcore.error.LoggingErrorReporting(
             warning_level_errors=(Exception,))
         with grokcore.error.testing.Logger() as log:
@@ -77,6 +79,26 @@ class TestErrorReporting(grokcore.error.testing.TestCase):
         self.assertEqual(1, len(log.records))
         self.assertEqual('grokcore.error', log.records[0].name)
         self.assertEqual('WARNING', log.records[0].levelname)
+        self.assertEqual(
+            """Exception test raising an Exception""",
+            log.format(log.records[0]))
+
+    def test_raising_via_getUtility(self):
+        zope.component.provideUtility(
+            grokcore.error.errorreport.LoggingErrorReporting())
+        eru = zope.component.getUtility(
+            zope.error.interfaces.IErrorReportingUtility)
+        eru.info_level_errors = (Exception,)
+
+        with grokcore.error.testing.Logger() as log:
+            try:
+                raise Exception('test raising an Exception')
+            except Exception:
+                eru.raising(sys.exc_info())
+        self.assertEqual(1, len(log.records))
+        self.assertEqual('grokcore.error', log.records[0].name)
+        self.assertEqual('INFO', log.records[0].levelname)
+
         self.assertEqual(
             """Exception test raising an Exception""",
             log.format(log.records[0]))
