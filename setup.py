@@ -7,23 +7,24 @@ import sys
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
+
 long_description = (
     read('README.txt')
     + '\n' +
     read('CHANGES.txt')
-    )
+)
 
 
 tests_require = [
     'zope.testing',
-    ]
+]
 
 if sys.version_info.major == 2:
     tests_require.append('mock==1.0.1')
 
 setup(
     name='grokcore.error',
-    version='3.0.2.dev0',
+    version='3.1.0.dev0',
     author='Grok Team',
     author_email='grok-dev@zope.org',
     url='http://grok.zope.org',
@@ -40,9 +41,11 @@ setup(
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: Implementation',
         'Programming Language :: Python :: Implementation :: CPython',
         'Programming Language :: Python :: Implementation :: PyPy',
@@ -61,7 +64,7 @@ setup(
         'zope.error',
         'zope.interface',
         'zope.publisher',
-        ],
+    ],
     tests_require=tests_require,
     extras_require={'test': tests_require},
 )
