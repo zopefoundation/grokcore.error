@@ -17,6 +17,7 @@ long_description = (
 
 tests_require = [
     'zope.testing',
+    'zope.testrunner',
 ]
 
 if sys.version_info.major == 2:
