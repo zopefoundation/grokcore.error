@@ -7,7 +7,7 @@ import grokcore.error
 import grokcore.error.testing
 
 
-class FauxRequest(object):
+class FauxRequest:
 
     def __init__(self, url):
         self.URL = url

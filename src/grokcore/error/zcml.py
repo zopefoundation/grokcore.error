@@ -1,17 +1,11 @@
-import sys
 
+import grokcore.component
 import zope.configuration.fields
 import zope.interface
 
-import grokcore.component
-
-
-if sys.version_info.major == 3:
-    unicode = str
-
 
 def _(x):
-    return unicode(x)  # no i18n-ing for now.
+    return str(x)  # no i18n-ing for now.
 
 
 class IErrorReportingUtilityDirective(zope.interface.Interface):

@@ -1,12 +1,11 @@
 import logging
 
-import zope.error.interfaces
-
 import grokcore.component as grok
+import zope.error.interfaces
 
 
 @grok.implementer(zope.error.interfaces.IErrorReportingUtility)
-class LoggingErrorReporting(object):
+class LoggingErrorReporting:
     grok.provides(zope.error.interfaces.IErrorReportingUtility)
 
     def __init__(
@@ -24,7 +23,7 @@ class LoggingErrorReporting(object):
 
     def raising(self, exc_info, request=None):
         exc_class = exc_info[0]
-        msg = '%s %s' % (exc_info[0].__name__, str(exc_info[1]))
+        msg = '{} {}'.format(exc_info[0].__name__, str(exc_info[1]))
         if request is not None:
             url = getattr(request, 'URL', None)
             if url is not None:

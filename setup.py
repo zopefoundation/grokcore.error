@@ -1,5 +1,4 @@
 import os
-import sys
 
 from setuptools import find_packages
 from setuptools import setup
@@ -21,15 +20,12 @@ tests_require = [
     'zope.testrunner',
 ]
 
-if sys.version_info.major == 2:
-    tests_require.append('mock==1.0.1')
-
 setup(
     name='grokcore.error',
     version='4.0.dev0',
     author='Grok Team',
-    author_email='grok-dev@zope.org',
-    url='http://grok.zope.org',
+    author_email='zope-dev@zope.dev',
+    url='https://github.com/zopefoundation/grokcore.error',
     download_url='http://pypi.python.org/pypi/grokcore.startup',
     description='Paster support for Grok projects.',
     long_description=long_description,
@@ -56,6 +52,7 @@ setup(
     namespace_packages=['grokcore'],
     include_package_data=True,
     zip_safe=False,
+    python_requires='>=3.7',
     install_requires=[
         'grokcore.component',
         'setuptools',
