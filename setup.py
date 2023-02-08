@@ -25,7 +25,7 @@ if sys.version_info.major == 2:
 
 setup(
     name='grokcore.error',
-    version='3.1.0.dev0',
+    version='4.0.dev0',
     author='Grok Team',
     author_email='grok-dev@zope.org',
     url='http://grok.zope.org',
