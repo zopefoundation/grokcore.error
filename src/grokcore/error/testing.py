@@ -1,10 +1,13 @@
-import unittest
 import doctest
 import logging
+import sys
+import unittest
+
 import zope.component.testlayer
+
 import grokcore.error
 
-import sys
+
 if sys.version_info.major == 3:
     unicode = str
 

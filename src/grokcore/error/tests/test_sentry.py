@@ -1,3 +1,4 @@
+import sys
 import unittest
 
 from zope.publisher.browser import TestRequest
@@ -5,7 +6,7 @@ from zope.publisher.browser import TestRequest
 from grokcore.error.sentry import SentryAwareLoggingErrorReporting
 from grokcore.error.zcml import errorreportingutility
 
-import sys
+
 if sys.version_info.major == 2:
     import mock
 

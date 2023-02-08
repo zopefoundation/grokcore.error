@@ -1,8 +1,10 @@
 import sys
-import grokcore.error
-import grokcore.error.testing
+
 import zope.component
 import zope.error.interfaces
+
+import grokcore.error
+import grokcore.error.testing
 
 
 class FauxRequest(object):

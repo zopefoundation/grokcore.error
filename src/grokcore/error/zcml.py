@@ -1,8 +1,11 @@
-import zope.interface
+import sys
+
 import zope.configuration.fields
+import zope.interface
+
 import grokcore.component
 
-import sys
+
 if sys.version_info.major == 3:
     unicode = str
 
