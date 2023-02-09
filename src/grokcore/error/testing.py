@@ -1,12 +1,10 @@
-import unittest
 import doctest
 import logging
-import zope.component.testlayer
-import grokcore.error
+import unittest
 
-import sys
-if sys.version_info.major == 3:
-    unicode = str
+import zope.component.testlayer
+
+import grokcore.error
 
 
 class Layer(zope.component.testlayer.ZCMLFileLayer):
@@ -16,19 +14,17 @@ class Layer(zope.component.testlayer.ZCMLFileLayer):
 layer = Layer(grokcore.error, zcml_file='testing.zcml')
 
 
-class Example(object):
+class Example:
     def __init__(self, expected):
         self.want = expected
 
 
-class OutputCheckerMixin(object):
+class OutputCheckerMixin:
 
     def __init__(self, *arg, **kw):
-        super(OutputCheckerMixin, self).__init__(*arg, **kw)
-        # In case *both* comparision items are ASCII strings
+        super().__init__(*arg, **kw)
+        # In case *both* comparision items are strings
         self.addTypeEqualityFunc(str, self._check_basestring)
-        # In case *both* comparision items are unicode strings
-        self.addTypeEqualityFunc(unicode, self._check_basestring)
 
     def _check_basestring(self, expected, actual, msg=None):
         flags = (
