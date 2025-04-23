@@ -23,7 +23,7 @@ class LoggingErrorReporting:
 
     def raising(self, exc_info, request=None):
         exc_class = exc_info[0]
-        msg = '{} {}'.format(exc_info[0].__name__, str(exc_info[1]))
+        msg = f'{exc_info[0].__name__} {str(exc_info[1])}'
         if request is not None:
             url = getattr(request, 'URL', None)
             if url is not None:

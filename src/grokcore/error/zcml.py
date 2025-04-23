@@ -1,4 +1,3 @@
-
 import grokcore.component
 import zope.configuration.fields
 import zope.interface
@@ -17,7 +16,7 @@ class IErrorReportingUtilityDirective(zope.interface.Interface):
         description=_(
             'The factory used to create the error reporting utility.'),
         required=True,
-        )
+    )
 
     info_level_errors = zope.configuration.fields.Tokens(
         title=_('INFO-level errors'),
@@ -27,7 +26,7 @@ class IErrorReportingUtilityDirective(zope.interface.Interface):
         required=True,
         value_type=zope.configuration.fields.GlobalObject(
             missing_value=object()),
-        )
+    )
 
     warning_level_errors = zope.configuration.fields.Tokens(
         title=_('WARNING-level errors'),
@@ -37,7 +36,7 @@ class IErrorReportingUtilityDirective(zope.interface.Interface):
         required=True,
         value_type=zope.configuration.fields.GlobalObject(
             missing_value=object()),
-        )
+    )
 
     always_exc_info = zope.configuration.fields.Bool(
         title=_("Always emit exc_info"),
@@ -50,7 +49,7 @@ class IErrorReportingUtilityDirective(zope.interface.Interface):
             'handler for the info- and warning-level errors.'),
         default=False,
         required=False,
-        )
+    )
 
 
 def errorreportingutility(
@@ -69,4 +68,4 @@ def errorreportingutility(
         discriminator=('utility', provides, name),
         callable=grokcore.component.provideUtility,
         args=(component, provides, name),
-        )
+    )
