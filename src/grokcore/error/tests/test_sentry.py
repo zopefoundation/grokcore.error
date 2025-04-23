@@ -40,7 +40,7 @@ class ZcmlTestCase(unittest.TestCase):
         request.setPrincipal(MockPrincipal())
         reporter = SentryAwareLoggingErrorReporting()
         result = reporter.make_extra(request)
-        self.assertTrue('sentry.interfaces.User' in result)
+        self.assertIn('sentry.interfaces.User', result)
         self.assertEqual('foo', result['sentry.interfaces.User']['id'])
 
     def test_make_extra_request_none(self):
