@@ -13,23 +13,17 @@ long_description = (
     read('CHANGES.rst')
 )
 
-
-tests_require = [
-    'zope.testing',
-    'zope.testrunner >= 6.4',
-]
-
 setup(
     name='grokcore.error',
     version='5.1.dev0',
     author='Grok Team',
     author_email='zope-dev@zope.dev',
     url='https://github.com/zopefoundation/grokcore.error',
-    download_url='http://pypi.python.org/pypi/grokcore.startup',
-    description='Paster support for Grok projects.',
+    download_url='https://pypi.org/project/grokcore.startup',
+    description='Error reporting utility for Grok projects.',
     long_description=long_description,
     license='ZPL',
-    keywords='zope zope3 grok grokproject WSGI Paste paster',
+    keywords='zope zope3 grok error reporting utility',
     classifiers=[
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
@@ -58,6 +52,8 @@ setup(
         'zope.interface',
         'zope.publisher',
     ],
-    tests_require=tests_require,
-    extras_require={'test': tests_require},
+    extras_require={'test': [
+        'zope.testing',
+        'zope.testrunner >= 6.4',
+    ]},
 )
